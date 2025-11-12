@@ -1,73 +1,225 @@
-# Welcome to your Lovable project
+# 🚀 IdeaSpark - Hackathon Collaboration Platform
 
-## Project info
+A modern web application designed for hackathons and innovation communities where students and developers can share ideas, form teams, and collaborate on projects.
 
-**URL**: https://lovable.dev/projects/5060578c-de86-4b4e-b829-ac2e9c21f880
+![IdeaSpark](https://img.shields.io/badge/React-18.3.1-blue)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.8.3-blue)
+![Vite](https://img.shields.io/badge/Vite-5.4.19-purple)
+![Supabase](https://img.shields.io/badge/Supabase-Ready-green)
 
-## How can I edit this code?
+## ✨ Features
 
-There are several ways of editing your application.
+### 📝 Feed & Posts
 
-**Use Lovable**
+- Browse innovative ideas from the community
+- Filter by trending, teammates needed, or all posts
+- Like and comment on posts
+- Create new posts with tags, images, and descriptions
+- Detailed post view with full interaction capabilities
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/5060578c-de86-4b4e-b829-ac2e9c21f880) and start prompting.
+### 👥 Teams
 
-Changes made via Lovable will be committed automatically to this repo.
+- Create and manage teams
+- Invite members and assign roles (owner, member)
+- Team dashboard with member overview
+- Collaboration spaces for team communication
+- Ready for real-time chat integration
 
-**Use your preferred IDE**
+### 🤖 AI Assistant
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+- Interactive AI chatbot for brainstorming
+- Context-aware responses for problem-solving
+- Quick prompt suggestions to get started
+- Helps with idea validation and team building
+- Systematic approach to tackling challenges
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### 📋 Kanban Board
 
-Follow these steps:
+- Visual task management with drag-and-drop ready structure
+- Four-column workflow: To Do, In Progress, Review, Done
+- Create tasks with title, description, and status
+- Color-coded status indicators
+- Perfect for team project management
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+### 🔔 Notifications
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+- Real-time notification center
+- Support for likes, comments, follows, and team invites
+- Unread badge in header
+- Mark as read and delete functionality
+- Time-stamped with relative time display
 
-# Step 3: Install the necessary dependencies.
-npm i
+### 👤 User Profiles
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+- Customizable user profiles with avatars
+- Bio, college, and interests
+- View user's posts and activity
+- Follow/unfollow functionality
+- Profile statistics (posts, followers, following)
+
+### 📊 Dashboard
+
+- Personal dashboard with statistics
+- Quick actions for creating posts and exploring ideas
+- Recent posts overview
+- Track your innovation journey
+
+## 🛠️ Tech Stack
+
+- **Frontend**: React 18 + TypeScript
+- **Build Tool**: Vite
+- **Styling**: Tailwind CSS + shadcn/ui components
+- **Routing**: React Router v6
+- **State Management**: React Hooks (useState, useCallback, useEffect)
+- **Backend**: Supabase (PostgreSQL)
+- **Authentication**: Supabase Auth
+- **Icons**: Lucide React
+- **Date Formatting**: date-fns
+
+## 📦 Installation
+
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/yourusername/ideaspark.git
+   cd ideaspark
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   npm install
+   ```
+
+3. **Set up environment variables**
+   Create a `.env` file in the root directory:
+
+   ```env
+   VITE_SUPABASE_URL=your_supabase_url
+   VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+   ```
+
+4. **Run the development server**
+
+   ```bash
+   npm run dev
+   ```
+
+5. **Open your browser**
+   Navigate to `http://localhost:8080`
+
+## 🗄️ Database Setup
+
+The application uses Supabase as the backend. You'll need to set up the following tables:
+
+### Tables
+
+- `profiles` - User profiles
+- `posts` - User posts/ideas
+- `comments` - Post comments
+- `likes` - Post likes
+- `follows` - User follows
+- `tags` - Post tags
+- `post_tags` - Post-tag relationships
+- `user_interests` - User interests
+- `teams` - Team information
+- `team_members` - Team membership
+- `tasks` - Kanban tasks
+- `notifications` - User notifications
+
+See `supabase/migrations/` for the complete schema.
+
+## 🚀 Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run build:dev` - Build in development mode
+- `npm run lint` - Run ESLint
+- `npm run preview` - Preview production build
+
+## 📁 Project Structure
+
+```
+ideaspark/
+├── src/
+│   ├── components/        # Reusable components
+│   │   ├── ui/           # shadcn/ui components
+│   │   └── Header.tsx    # Main navigation header
+│   ├── pages/            # Page components
+│   │   ├── Landing.tsx   # Landing page
+│   │   ├── Feed.tsx      # Ideas feed
+│   │   ├── Teams.tsx     # Teams listing
+│   │   ├── Kanban.tsx    # Kanban board
+│   │   ├── AIChat.tsx    # AI assistant
+│   │   └── ...
+│   ├── hooks/            # Custom React hooks
+│   ├── lib/              # Utility functions
+│   └── integrations/     # Supabase integration
+├── public/               # Static assets
+└── supabase/            # Database migrations
 ```
 
-**Edit a file directly in GitHub**
+## 🎨 Design System
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+The application uses a custom design system built on:
 
-**Use GitHub Codespaces**
+- **Colors**: Gradient-based primary colors with HSL variables
+- **Typography**: System font stack with responsive sizing
+- **Components**: shadcn/ui component library
+- **Spacing**: Tailwind CSS spacing scale
+- **Animations**: Smooth transitions and hover effects
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 🔐 Authentication
 
-## What technologies are used for this project?
+IdeaSpark uses Supabase Authentication with:
 
-This project is built with:
+- Email/password sign up and login
+- User onboarding flow
+- Protected routes
+- Session management
+- Profile creation on signup
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## 🌐 Deployment
 
-## How can I deploy this project?
+### Vercel (Recommended)
 
-Simply open [Lovable](https://lovable.dev/projects/5060578c-de86-4b4e-b829-ac2e9c21f880) and click on Share -> Publish.
+1. Push your code to GitHub
+2. Import project in Vercel
+3. Add environment variables
+4. Deploy!
 
-## Can I connect a custom domain to my Lovable project?
+### Netlify
 
-Yes, you can!
+1. Build the project: `npm run build`
+2. Deploy the `dist` folder
+3. Configure environment variables
+4. Set up redirects for SPA routing
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## 🤝 Contributing
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📝 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🙏 Acknowledgments
+
+- [shadcn/ui](https://ui.shadcn.com/) for the beautiful component library
+- [Supabase](https://supabase.com/) for the backend infrastructure
+- [Lucide](https://lucide.dev/) for the icon set
+- [Tailwind CSS](https://tailwindcss.com/) for the styling framework
+
+## 📧 Contact
+
+For questions or feedback, please open an issue on GitHub.
+
+---
+
+Built with ❤️ for the hackathon community
