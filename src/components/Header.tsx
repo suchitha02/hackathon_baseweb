@@ -2,9 +2,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Lightbulb, User, LogOut, Bell } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { supabase } from "@/integrations/supabase/client";
+import { authAPI, usersAPI } from "@/services/api";
 import { useEffect, useState } from "react";
-import { User as SupabaseUser } from "@supabase/supabase-js";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -19,44 +18,37 @@ interface Profile {
   avatar_url?: string;
 }
 
+interface User {
+  id: string;
+  email?: string;
+}
+
 export const Header = () => {
   const navigate = useNavigate();
-  const [user, setUser] = useState<SupabaseUser | null>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null);
-      if (session?.user) {
-        fetchProfile(session.user.id);
-      }
-    });
-
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null);
-      if (session?.user) {
-        fetchProfile(session.user.id);
-      } else {
-        setProfile(null);
-      }
-    });
-
-    return () => subscription.unsubscribe();
+    checkAuth();
   }, []);
 
+  const checkAuth = async () => {
+    const { data } = await authAPI.getUser();
+    setUser(data?.user ?? null);
+    if (data?.user) {
+      fetchProfile(data.user.id);
+    }
+  };
+
   const fetchProfile = async (userId: string) => {
-    const { data } = await supabase
-      .from("profiles")
-      .select("*")
-      .eq("id", userId)
-      .single();
+    const { data } = await usersAPI.getUserById(userId);
     setProfile(data);
   };
 
   const handleSignOut = async () => {
-    await supabase.auth.signOut();
+    await authAPI.signOut();
+    setUser(null);
+    setProfile(null);
     navigate("/");
   };
 

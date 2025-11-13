@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { supabase } from "@/integrations/supabase/client";
+import { authAPI } from "@/services/api";
 import { useToast } from "@/hooks/use-toast";
 import { Lightbulb } from "lucide-react";
 
@@ -22,16 +22,9 @@ export default function Signup() {
     setLoading(true);
 
     try {
-      const { error } = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          emailRedirectTo: `${window.location.origin}/`,
-          data: {
-            full_name: fullName,
-            username: username,
-          },
-        },
+      const { data, error } = await authAPI.signUp(email, password, {
+        full_name: fullName,
+        username: username,
       });
 
       if (error) throw error;
